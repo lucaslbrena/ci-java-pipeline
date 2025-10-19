@@ -1,0 +1,14 @@
+name: Java CI
+ on: [push, pull_request]
+ jobs:
+ build:
+ runs-on: ubuntu-latest
+ steps:- name: Checkout
+ uses: actions/checkout@v3- name: Set up JDK
+ uses: actions/setup-java@v3
+ with:
+ java-version: '17'
+ distribution: 'temurin'- name: Build com Maven
+ run: mvn -B package- name: Lint com Checkstyle
+ run: mvn checkstyle:check- name: Testes
+ run: mvn test
