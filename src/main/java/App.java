@@ -1,4 +1,4 @@
-package com.exemplo;
+
 
 public class App {
     public static int soma(int a, int b) {

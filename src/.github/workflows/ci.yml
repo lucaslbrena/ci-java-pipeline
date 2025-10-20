@@ -1,14 +1,32 @@
 name: Java CI
- on: [push, pull_request]
- jobs:
- build:
- runs-on: ubuntu-latest
- steps:- name: Checkout
- uses: actions/checkout@v3- name: Set up JDK
- uses: actions/setup-java@v3
- with:
- java-version: '17'
- distribution: 'temurin'- name: Build com Maven
- run: mvn -B package- name: Lint com Checkstyle
- run: mvn checkstyle:check- name: Testes
- run: mvn test
+
+on: 
+  [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Etapa 1: Clonar o repositório
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Etapa 2: Configurar o JDK 17
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # Etapa 3: Compilar o projeto com Maven
+      - name: Build com Maven
+        run: mvn -B package
+
+      # Etapa 4: Analisar código com Checkstyle
+      - name: Lint com Checkstyle
+        run: mvn checkstyle:check
+
+      # Etapa 5: Executar testes automatizados
+      - name: Testes
+        run: mvn test
